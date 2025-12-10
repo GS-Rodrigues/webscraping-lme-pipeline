@@ -18,8 +18,7 @@ def insert_row(data_referencia, value):
             INSERT INTO valores_scraping_lme (data_referencia, valor)
             VALUES (%s, %s)
             ON CONFLICT (data_referencia) DO UPDATE
-            SET valor = EXCLUDED.valor,
-                data_coleta = NOW();
+            SET valor = EXCLUDED.valor;
         """, (data_referencia, value))
 
         conn.commit()
