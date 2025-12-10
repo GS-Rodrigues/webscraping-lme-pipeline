@@ -1,28 +1,33 @@
 import requests
+import Insert
+from datetime import date
+import date_treatment
 from bs4 import BeautifulSoup
 
-url = 'https://shockmetais.com.br/lme';
+url = f"https://shockmetais.com.br/lme/{date.today().month}-{date.today().year}";
 
 response = requests.get(url);
 
 html_content = response.content;
 
 
-soup = BeautifulSoup(html_content, 'html.parser')
+soup = BeautifulSoup(html_content, 'html.parser');
 
 table = soup.find_all(
     name='table',
     attrs= {'class' : 'table table-hover table-sm table-striped shadow'}
-)[0]
+)[0];
 
 
-lme_data = {}
-for row in table.find_all('tr')[1:-2]:
-    colms = row.find_all('td')
+for row in table.find_all('tr')[1:-1]:
+    colms = row.find_all('td');
     if colms:
-        month_year = colms[0].text.strip()
-        aluminium = colms[3].text.strip().replace('\n', '').replace(' ', '');
-        lme_data.update({month_year:aluminium})
-
-for key, value in lme_data.items():
-    print(key, value)
+        month_year = colms[0].text.strip();
+        raw = colms[3].text.strip()
+        clean = raw.replace(" ", "").replace("\n", "").replace(",", "").replace(",", ".")
+        aluminium = float(clean)
+        
+        if "Média" in month_year:
+            continue;
+        else:
+            Insert.insert_row(date_treatment.parse_data_br(month_year, date.today().year), aluminium);
