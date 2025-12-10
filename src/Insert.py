@@ -1,3 +1,4 @@
+import os
 import psycopg2
 
 def insert_row(data_referencia, value):
@@ -6,11 +7,11 @@ def insert_row(data_referencia, value):
     
     try:
         conn = psycopg2.connect(
-            host=DB_HOST,
-            database=DB_NAME,
-            user=DB_USER,
-            password=DB_PASSWORD
-        )
+            host=os.environ["DB_HOST"],
+            database=os.environ["DB_NAME"],
+            user=os.environ["DB_USER"],
+            password=os.environ["DB_PASSWORD"]
+)
         cursor = conn.cursor()
 
         cursor.execute("""
