@@ -6,16 +6,11 @@ def insert_row(data_referencia, value):
     cursor = None
     
     try:
-        conn = psycopg2.connect(
-            host=os.environ["DB_HOST"],
-            database=os.environ["DB_NAME"],
-            user=os.environ["DB_USER"],
-            password=os.environ["DB_PASSWORD"]
-)
+        conn = psycopg2.connect(os.environ["DATABASE_URL"])
         cursor = conn.cursor()
 
         cursor.execute("""
-            INSERT INTO valores_scraping (data_referencia, valor)
+            INSERT INTO valores_scraping_lme (data_referencia, valor)
             VALUES (%s, %s)
             ON CONFLICT (data_referencia) DO UPDATE
             SET valor = EXCLUDED.valor,
