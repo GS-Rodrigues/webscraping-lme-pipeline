@@ -6,8 +6,13 @@ def insert_row(data_referencia, value):
     cursor = None
     
     try:
-        conn = psycopg2.connect(os.environ["DATABASE_URL"])
-        cursor = conn.cursor()
+        conn = psycopg2.connect(
+            os.environ["DATABASE_URL"],
+            port=os.environ["DB_PORT"],
+            database=os.environ["DB_NAME"],
+            user=os.environ["DB_USER"],
+            password=os.environ["DB_PASSWORD"]
+        cursor = conn.cursor())
 
         cursor.execute("""
             INSERT INTO valores_scraping_lme (data_referencia, valor)
