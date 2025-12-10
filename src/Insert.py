@@ -7,7 +7,7 @@ def insert_row(data_referencia, value):
     
     try:
         conn = psycopg2.connect(
-            os.environ["DATABASE_URL"],
+            host = os.environ["DB_HOST"],
             port=os.environ["DB_PORT"],
             database=os.environ["DB_NAME"],
             user=os.environ["DB_USER"],
