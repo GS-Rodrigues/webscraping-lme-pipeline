@@ -22,12 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Debug secrets length
-        run: |
-          echo "HOST LEN: ${#DB_HOST}"
-          echo "USER LEN: ${#DB_USER}"
-          echo "PASS LEN: ${#DB_PASSWORD}"
-          echo "NAME LEN: ${#DB_NAME}"
-          echo "PORT LEN: ${#DB_PORT}"
+        run:
         env:
           DB_HOST: ${{ vars.DB_HOST }}
           DB_USER: ${{ vars.DB_USER }}
