@@ -11,8 +11,8 @@ def insert_row(data_referencia, value):
             port=os.environ["DB_PORT"],
             database=os.environ["DB_NAME"],
             user=os.environ["DB_USER"],
-            password=os.environ["DB_PASSWORD"]
-        cursor = conn.cursor())
+            password=os.environ["DB_PASSWORD"])
+        cursor = conn.cursor()
 
         cursor.execute("""
             INSERT INTO valores_scraping_lme (data_referencia, valor)
