@@ -6,10 +6,10 @@ def insert_row(data_referencia, value):
     
     try:
         conn = psycopg2.connect(
-            host='localhost',
-            database='valores_scraping',
-            user='postgres',
-            password='postgres'
+            host=DB_HOST,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
         )
         cursor = conn.cursor()
 
