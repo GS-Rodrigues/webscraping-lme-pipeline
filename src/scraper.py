@@ -45,8 +45,11 @@ while j <= date.today().year:
                     raw_number = colms[3].text.strip();
                     clean_number = raw_number.replace(" ", "").replace("\n", "").replace(",", "");
                     aluminium = clean_number;
-                    if not ("feriado" in month_year.lower() or "Média" in month_year):
-                        aluminium = float(aluminium);
-                        Insert.insert_row(date_treatment.parse_data_br(month_year, j), aluminium);
+                    if not "feriado" in month_year.lower() and not "Média" in month_year:
+                        try:
+                            aluminium = float(aluminium);
+                            Insert.insert_row(date_treatment.parse_data_br(month_year, j), aluminium);
+                        except ValueError:
+                            continue
             i = (i + 1);
     j = (j + 1);
