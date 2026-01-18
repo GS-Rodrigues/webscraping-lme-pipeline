@@ -4,22 +4,7 @@ from datetime import date
 import date_treatment
 from bs4 import BeautifulSoup
 
-j = 2008
-
-month_to_year = {
-    "jan": 1,
-    "fev": 2,
-    "mar": 3,
-    "abr": 4,
-    "mai": 5,
-    "jun": 6,
-    "jul": 7,
-    "ago": 8,
-    "set": 9,
-    "out": 10,
-    "nov": 11,
-    "dez": 12
-}
+j = (date.today().year - 1);
 
 while j <= date.today().year:
     i = 1;
@@ -47,8 +32,10 @@ while j <= date.today().year:
                     aluminium = clean_number;
                     if not "feriado" in month_year.lower() and not "Média" in month_year:
                         try:
-                            aluminium = float(aluminium);
-                            Insert.insert_row(date_treatment.parse_data_br(month_year, j), aluminium);
+                            date_clean = date_treatment.parse_data_br(month_year, j);
+                            if date_clean.month == i:
+                                aluminium = float(aluminium);
+                                Insert.insert_row(date_clean, aluminium);
                         except ValueError:
                             continue
             i = (i + 1);
