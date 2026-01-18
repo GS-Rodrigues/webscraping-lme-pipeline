@@ -3,7 +3,7 @@ import Insert
 from datetime import date
 import date_treatment
 from bs4 import BeautifulSoup
-from time import time
+import time
 
 
 for j in range(date.today().year-1, date.today().year+1):
