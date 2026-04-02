@@ -10,8 +10,7 @@ cursor = conn.cursor();
 
 try:
     yesterday = (datetime.now() - timedelta(days=1)).date()
-    #data_str = yesterday.strftime("%m-%Y")
-    data_str = f'3-2026'
+    data_str = yesterday.strftime("%m-%Y")
 
     url = f"https://shockmetais.com.br/lme/{data_str}";
     response = requests.get(url, timeout=10);
